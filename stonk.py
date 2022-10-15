@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import sys
 
 def highest_percent_up(eod_prices):
-    #this does not work right now
+    #this does not work 100% right now
     max_increase = sys.maxsize*-1
     top_5 = []
 
