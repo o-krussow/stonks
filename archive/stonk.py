@@ -1,3 +1,5 @@
+#THIS FILE CURRENTLY DOES NOTHING
+
 import yfinance as yf  
 import matplotlib.pyplot as plt
 import sys
