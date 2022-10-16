@@ -9,10 +9,12 @@ def read_tickers_from_file(filename):
     return f_contents.split("\n")[:-1]
 
 
+
 #This is an example of how we can implement one of our strategies, this function is passed to Backtest to be run further down in this file.
 #Things like determining price histories, market sentiment, etc, need to be done in this function. Backtest just iterates through the tickers and keeps track of how many of each one we have.
-def strategy1(ticker_name, quantity, curr_date):
-    print(ticker_name, quantity)
+def strategy1(ticker, curr_date):
+    print(ticker)
+
 
 
 #nasdaq tickers only for now, for testing-----------

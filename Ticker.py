@@ -14,6 +14,8 @@ class Ticker:
         data = yf.download(self.ticker_name, day, next_day, interval="60m")
         return data
 
+    def __str__(self):
+        return ("Name:" + self.ticker_name + " Quant:" + str(self.quantity))
 
 
 

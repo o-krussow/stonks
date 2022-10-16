@@ -17,9 +17,7 @@ class Backtest:
                 #call the strategy to determine what to do next
                 #Setup "return signals" so Backtest class can communicate with our strategy function on what it decides to do.
                 #This Backtest class is going to have to keep track of our capital, our quantities of different stocks, etc.
-                self.evaluate_strategy(ticker.ticker_name, ticker.quantity, curr_date)
+                self.evaluate_strategy(ticker, curr_date)
             
             print(curr_date)
             curr_date = utils.add_day(curr_date)    #Progress one day
-
-
