@@ -13,7 +13,8 @@ def read_tickers_from_file(filename):
 #This is an example of how we can implement one of our strategies, this function is passed to Backtest to be run further down in this file.
 #Things like determining price histories, market sentiment, etc, need to be done in this function. Backtest just iterates through the tickers and keeps track of how many of each one we have.
 def strategy1(ticker, curr_date):
-    print(ticker)
+    print(ticker.get_days_prices("2022-01-05"))
+    #print(ticker)
 
 
 

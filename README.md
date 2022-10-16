@@ -17,6 +17,22 @@ Consider weekends in trading, big spikes happen a lot here it seems
 
 - Find best "sell level" (or % up) per stock based on back testing, figure out same for downwards trends, determine where to cut losses.
 
+- It would be good if we could cache all our data so we don't have to slam yahoo servers every time we want to run a backtest.
+ - Maybe I could set up nginx/dns server to take care of this.
+ - Alternatively, we download all the data into some sort of CSV/JSON/some other kind of database thing and query it from there.
+
+### Local database pros:
+- Fastest
+### Local database cons:
+- Would take extra work to adapt our code to use one of these options.
+
+### Caching server pros:
+- Would be more flexible if we started running multiple nodes
+### Caching server cons:
+- Slower than some sort of database
+- I'm not 100% how to set it up right away.
+
+
 
 
 

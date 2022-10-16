@@ -21,3 +21,4 @@ class Backtest:
             
             print(curr_date)
             curr_date = utils.add_day(curr_date)    #Progress one day
+            
