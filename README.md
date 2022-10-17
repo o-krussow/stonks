@@ -7,6 +7,8 @@ Use google trends
 
 Consider weekends in trading, big spikes happen a lot here it seems
 
+What data do we need? Just closing prices for a given interval, or do we want all of the information given by yfinance?
+
 ## Lets say we have a stock ticker, determine name of company from the stock ticker
 - Now check google trends for the name of the company as the key word
 - Check news page on google and find which words pop up a lot, use beautiful soup to scrape
@@ -31,6 +33,10 @@ Consider weekends in trading, big spikes happen a lot here it seems
 ### Caching server cons:
 - Slower than some sort of database
 - I'm not 100% how to set it up right away.
+
+## Useful links:
+
+Determining public sentiment: https://monkeylearn.com/blog/sentiment-analysis-machine-learning/
 
 
 
