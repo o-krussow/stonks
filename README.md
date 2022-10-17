@@ -18,6 +18,16 @@ Consider weekends in trading, big spikes happen a lot here it seems
 - Find best "sell level" (or % up) per stock based on back testing, figure out same for downwards trends, determine where to cut losses.
 
 
+- Continous capital principle
+    -Rate current invesments on boom likliehood, when out of capital, sell the lowest likely to boom
 
+- Strongest Possible Portfolio principle
+    -Similar to CCP^^ but rather rates all potential investments as well and only sells current investment if potential is stronger than current (take into
+    account taxes and transaction fees)
 
+-Double Down Principles
+    -If a stock we like (and have capital invested in) drops a significant percentage (or even raises ig), double down investment
+    -This is not very condusive to a day trader sentiment
 
+- Diversity Principle
+    -Measure our portfolio's "diversity score" to make sure we are differentiated (ie if one industry crashes we don't lose everything)
