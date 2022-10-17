@@ -23,16 +23,7 @@ What data do we need? Just closing prices for a given interval, or do we want al
  - Maybe I could set up nginx/dns server to take care of this.
  - Alternatively, we download all the data into some sort of CSV/JSON/some other kind of database thing and query it from there.
 
-### Local database pros:
-- Fastest
-### Local database cons:
-- Would take extra work to adapt our code to use one of these options.
-
-### Caching server pros:
-- Would be more flexible if we started running multiple nodes
-### Caching server cons:
-- Slower than some sort of database
-- I'm not 100% how to set it up right away.
+I have decided that I would like to fit all the pricing data we can get our grubby little hands on in a MariaDB or Postgres database. This way, we have a centralized location that we can (very rapidly!) query for data.
 
 ## Useful links:
 
