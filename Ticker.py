@@ -11,7 +11,7 @@ class Ticker:
         #This will fail if one of the days is across a weekend/holiday where the market is closed.
         #Todo: Figure out an elegant way to handle errors if .download cannot get a day for ^^^ reason.
         next_day = utils.add_day(day)
-        data = yf.download(self.ticker_name, day, next_day, interval="60m")
+        data = yf.download(self.ticker_name, day, next_day, interval="1d")
         return data
 
     def __str__(self):
