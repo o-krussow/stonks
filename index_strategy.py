@@ -1,16 +1,16 @@
+from xml.dom import NAMESPACE_ERR
 import yfinance as yf
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-#!!! Don't foget about changign the date!!
-
+#!!! This file is all python implemented and based, I am going to start a new one that is primarily panda and time series based
 #General format for getting closed numbers in a list.
 #Need to consider how to offset 
-'''
-stock_full = yf.download("AAPL", "2022-10-17", interval="5m")
-stock_adjclose = stock_full['Adj Close'].values.tolist()'''
+
+stock_full = yf.download("NVDA", "2022-10-1", interval="5m")
+stock_adjclose = stock_full['Adj Close'].values.tolist()
 
 #Nasdaq closes and such
 nas_full = yf.download("^IXIC", "2022-10-1", interval="5m")
@@ -56,11 +56,11 @@ def read_tickers_from_file(filename):
 stocks = read_tickers_from_file("nasdaq_tickers.txt")
 
 #Returns a sorted dictionary of inputted number of stocks sorted by their covariance to the nasdaq
-def stock_covar_report(number_of_stocks):
+def stock_corel_report(number_of_stocks):
     stock_dict = {}
     #Goes through x amount of stocks (currently 500) and makes a dictionary of "ticker" : covariance
     for stock in stocks[:number_of_stocks]:
-        stock_full = yf.download(stock, "2022-10-1", interval="5m")
+        stock_full = yf.download(stock, "2022-1-1", interval="5m")
         stock_adjclose = stock_full['Adj Close'].values.tolist()
         try:
             cor = correlation(stock_adjclose, nas_adjclose)
@@ -84,4 +84,47 @@ def scatterplot(stock):
     df = pd.DataFrame(data=d)
     ax = sns.scatterplot(x = stock, y = "nasdaq", data=df)
     plt.show()
+
+#compares %change to price change correlations
+def correlation_testing():
+    print(correlation(stock_adjclose, nas_adjclose))
+    perc_change_stock = [ (x - stock_adjclose[x_ind+1]) / stock_adjclose[x_ind + 1] for (x_ind, x) in enumerate(stock_adjclose[:-2])]
+    perc_change_nas = [ (x - nas_adjclose[x_ind+1]) / nas_adjclose[x_ind + 1] for (x_ind, x) in enumerate(nas_adjclose[:-2])]
+    print(correlation(perc_change_stock, perc_change_nas))
+
+#implements manual 5-30 min lag both directions for a given stock
+#takes ticker, prints a list of tuples with the fromat ("ticker delay", correlation)
+def timing_test(stock):
+    time_dict = {}
+    stock_full = yf.download(stock, "2022-10-1", interval="5m")
+    stock_adjclose = stock_full['Adj Close'].values.tolist()
+    time_dict[stock + '0'] = correlation(stock_adjclose, nas_adjclose)
+    #Timing with stock after index
+    for x in range(1,7):
+        time = str(x*5) 
+        cor = correlation(stock_adjclose[x:], nas_adjclose[:-x])
+        time_dict[stock + time] = cor
+    
+    #timing with stock before index
+    for x in range(1,7):
+        time = str(x*-5) 
+        cor = correlation(stock_adjclose[:-x], nas_adjclose[x:])
+        time_dict[stock + time] = cor
+
+    sorted_dict = sorted(time_dict.items(), key=lambda x: x[1], reverse=True)
+    return(sorted_dict)
+
+#inputs a list of stocks into timing test and outputs a sorted list of tuples
+def stock_and_time_test(list_of_stocks):
+    result_list = []
+    for stock in list_of_stocks:
+        try:
+            stock_result = timing_test(stock[0])
+            for cor_tuple in stock_result:
+                result_list.append(cor_tuple)
+        except:
+            continue
+    result_list.sort(key=lambda x:x[1], reverse = True)
+
+    return result_list
 
