@@ -29,6 +29,27 @@ class mdb_connect():
         
         return return_dict
 
+        def get_pandas(self, ticker_list, start_date, end_date=datetime.strftime(datetime.now(), "%Y-%m-%d")):
+        data_dict = {}
+        time_set = set()
+        panda_input = {}
+        for ticker in ticker_list:
+            x = self.get_prices(ticker, start_date, end_date)
+            time_set.update(x.keys())
+        for ticker in ticker_list:
+            x = self.get_prices(ticker, start_date, end_date)
+            for time in time_set:
+                if time not in x.keys():
+                    x[time] = None
+            data_dict[ticker] = sorted(x.items())
+            price_list = []
+            for item in data_dict[ticker]:
+                price_list.append(item[1])
+            panda_input[ticker] = price_list
+       
+        df = pd.DataFrame(panda_input, index=x.keys())
+        return df
+
 if __name__ == "__main__":
     mdb = mdb_connect()
     print(mdb.get_prices("NDAQ", "2022-9-10", "2022-10-12"))
