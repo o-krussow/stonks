@@ -1,6 +1,7 @@
 import mariadb
 from datetime import datetime
 import utils
+import pandas as pd
 
 class mdb_connect():
     def __init__(self, hostname="192.168.1.168", db="stonks", username="user", password="password1"):
@@ -29,7 +30,7 @@ class mdb_connect():
         
         return return_dict
 
-        def get_pandas(self, ticker_list, start_date, end_date=datetime.strftime(datetime.now(), "%Y-%m-%d")):
+    def get_pandas(self, ticker_list, start_date, end_date=datetime.strftime(datetime.now(), "%Y-%m-%d")):
         data_dict = {}
         time_set = set()
         panda_input = {}
