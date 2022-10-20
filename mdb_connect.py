@@ -31,4 +31,4 @@ class mdb_connect():
 
 if __name__ == "__main__":
     mdb = mdb_connect()
-    print(mdb.get_prices("NVDA", "2022-9-10", "2022-10-12"))
+    print(mdb.get_prices("NDAQ", "2022-9-10", "2022-10-12"))

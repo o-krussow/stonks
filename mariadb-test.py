@@ -10,15 +10,17 @@ def read_tickers_from_file(filename):
         f_contents = f.read()
     return f_contents.split("\n")[:-1]
 
-
+#I would be very sad if this function was run accidently so pls dont
 def drop_tables():
     f_contents = read_tickers_from_file("nasdaq_tickers.txt")
 
-    for ticker in f_contents:
-        cursor.execute("DROP TABLE "+ticker+";")
+    #for ticker in f_contents:
+    #    cursor.execute("DROP TABLE "+ticker+";")
 
 def build_tables():
-    f_contents = read_tickers_from_file("nasdaq_tickers.txt")
+    #f_contents = read_tickers_from_file("nasdaq_tickers.txt")
+
+    #f_contents = ["^IXIC", "^DJI", "^GSPC", "^TYX"]
 
     for ticker in f_contents:
         try:
@@ -56,7 +58,8 @@ if __name__ == "__main__":
 
     cursor = con.cursor()
 
-    #drop_tables()
+
+    ###drop_tables()
     build_tables()
 
 
