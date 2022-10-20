@@ -16,7 +16,7 @@ def main(tickers, start_date, end_date, strategy):
 
 
 if __name__ == "__main__":
-    tickers = read_tickers_from_file("nasdaq_tickers.txt")
+    tickers = read_tickers_from_file("cleaned_nasdaq_tickers.txt")
 
     strategy = strat1.ExampleStrat()
 

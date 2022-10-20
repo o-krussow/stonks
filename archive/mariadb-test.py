@@ -12,7 +12,7 @@ def read_tickers_from_file(filename):
 
 #I would be very sad if this function was run accidently so pls dont
 def drop_tables():
-    f_contents = read_tickers_from_file("nasdaq_tickers.txt")
+    f_contents = read_tickers_from_file("cleaned_nasdaq_tickers.txt")
 
     #for ticker in f_contents:
     #    cursor.execute("DROP TABLE "+ticker+";")
