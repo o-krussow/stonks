@@ -39,6 +39,9 @@ class mdb_connect():
             time_set.update(x.keys())
         for ticker in ticker_list:
             x = self.get_prices(ticker, start_date, end_date)
+            sorted_x_values = list(x.values())
+            if len(list(x.values())) == 0:
+                continue
             for time in time_set:
                 if time not in x.keys():
                     x[time] = None
@@ -47,9 +50,16 @@ class mdb_connect():
             for item in data_dict[ticker]:
                 price_list.append(item[1])
             panda_input[ticker] = price_list
+            good_stock = x
        
-        df = pd.DataFrame(panda_input, index=x.keys())
-        return df
+        df = pd.DataFrame(panda_input, index=good_stock.keys())
+        return(df)
+
+    def dirty_ticker_printer(self, ticker_list):
+        for ticker in ticker_list:
+            x = self.get_prices(ticker, '2022-10-1', '2022-10-14')
+            if len(list(x.values())) == 0:
+                print(ticker)
 
 if __name__ == "__main__":
     mdb = mdb_connect()
