@@ -14,6 +14,16 @@ class mdb_connect():
         )
         self.cursor = self.con.cursor()
 
+    def get_price_at_timestamp(self, ticker, timestamp=datetime.strftime(datetime.now(), "%Y-%m-%d")):
+
+        return_dict = {}
+
+        self.cursor.execute("SELECT * FROM "+ticker+" WHERE timestamp LIKE \"%"+timestamp+"%\";")
+        for (date, price) in self.cursor:
+            return_dict[date] = price
+
+        return return_dict
+
 
     def get_prices(self, ticker, start_date, end_date=datetime.strftime(datetime.now(), "%Y-%m-%d")):
         curr_day = start_date
