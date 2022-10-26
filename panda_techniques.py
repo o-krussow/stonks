@@ -1,6 +1,7 @@
 import pandas as pd
 from mdb_connect import mdb_connect
-import astsadata as astsa
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 mdb = mdb_connect()
 
@@ -9,7 +10,7 @@ def read_tickers_from_file(filename):
         f_contents = f.read()
     return f_contents.split("\n")[:-1]
 
-ticker_list = read_tickers_from_file('clean_tickers.txt')
+ticker_list = read_tickers_from_file('volatile_369.txt')
 dirty_ticker_list = read_tickers_from_file('dirty_tickers.txt')
 clean_ticker_list = [x for x in ticker_list if x not in dirty_ticker_list]
 
@@ -36,6 +37,7 @@ def stock_list_lag_test(ticker_list, index_list = None, percent_change = False):
     lag_ds = pd.Series(dtype = 'float64')
     if index_list == None:
         index_list = ticker_list
+    progress_check = 0
     for index in index_list:
         for ticker in ticker_list:
             if index in ticker or ticker in index:
@@ -43,6 +45,20 @@ def stock_list_lag_test(ticker_list, index_list = None, percent_change = False):
             stock_lag = single_stock_lag_test(ticker, index, percent_change)
             lag_ds = pd.concat([lag_ds, stock_lag])
             lag_ds.sort_values(ascending=False, inplace=True)
+        progress_check += 1
+        print(str(progress_check) + " out of " + str(len(index_list)))
     return lag_ds
 
-print(stock_list_lag_test(clean_ticker_list, percent_change = True))
+
+def volatility():
+    volatility = percent_change(clean_ticker_list).abs().mean().sort_values(ascending=False)
+    top_quartile_len = int(len(volatility) * .1)
+    top_quartile = volatility[:top_quartile_len]
+    print(top_quartile)
+    for key in top_quartile.keys():
+        print(key)
+
+df = stock_list_lag_test(ticker_list, percent_change=True)
+with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
+    print(df[:100])
+
