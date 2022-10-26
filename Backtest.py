@@ -1,9 +1,10 @@
 import utils
+import mdb_connect
 
 class Backtest:
     def __init__(self, tickers: list, start_date: str, end_date: str, strategy):
         self.tickers = tickers
-        self.capital = 100    #Capital is $ to buy assets, right?
+        self.capital = 100000    #Capital is $ to buy assets, right?
         self.start_date = start_date
         self.end_date = end_date
         self.strategy = strategy #Strategy object
@@ -16,6 +17,9 @@ class Backtest:
         #Need to figure out the best way to query database at a given time, shouldn't be too hard I think? with
         #SELECT * FROM <ticker table> WHERE timestamp LIKE <something>
         #5 is placeholder
+        mdb = mdb_connect.mdb_connect()
+        db_dict = mdb.get_price_at_timestamp(ticker, timestamp)
+        print(db_dict)
         return 5
 
     def print_ticker_summary(self):
@@ -38,10 +42,8 @@ class Backtest:
 
                 curr_ticker_quant_in_possession = self.tickers_in_possession[ticker]
 
-                decision, quantity = self.strategy.main_strategy(ticker, curr_ticker_price, curr_ticker_quant_in_possession, curr_date, self.capital)
+                decision, quantity = self.strategy.main_strategy(ticker, curr_ticker_quant_in_possession, curr_ticker_price, curr_date, self.capital)
 
-
-                #print(curr_date, decision, quantity)
 
                 if decision == "hold":
                     #do nothing
@@ -64,5 +66,4 @@ class Backtest:
             #fix pls
             curr_date = utils.add_day(curr_date)    #Progress one day
         
-        print(self.capital)
         self.print_ticker_summary()
