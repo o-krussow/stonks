@@ -1,0 +1,24 @@
+volatile_369 x ppercentage lag correlation:
+HAPP | COCP 5min     0.997142
+HAPP | DICE 5min     0.963935
+HAPP | FNHC 5min     0.780152
+JXJT | HAPP 20min    0.688158
+JXJT | COCP 25min    0.686591
+                       ...   
+CYTO | BTB 30min     0.201694
+CRBP | TROO 30min    0.201564
+CYCN | APTX 5min     0.201366
+AUTL | WNW 15min     0.201277
+SLN | JWEL 5min      0.201238
+Length: 200, dtype: float64
+JXJT | VINC 20min   -0.188846
+SOBR | SINT 10min   -0.188945
+GCT | EJH 25min     -0.189090
+HAPP | LTCH 30min   -0.189216
+LCFY | SCPS 20min   -0.189442
+                       ...   
+JXJT | WINT 25min   -0.349268
+JXJT | JSPR 30min   -0.362695
+OTIC | TROO 30min   -0.371861
+HAPP | WINT 5min    -0.374444
+FAZE | NCRA 25min   -0.432837
