@@ -45,4 +45,17 @@ def stock_list_lag_test(ticker_list, index_list = None, percent_change = False):
             lag_ds.sort_values(ascending=False, inplace=True)
     return lag_ds
 
+def volatility():
+    volatility = percent_change(clean_ticker_list).abs().mean().sort_values(ascending=False)
+    top_quartile_len = int(len(volatility) * .1)
+    top_quartile = volatility[:top_quartile_len]
+    print(top_quartile)
+    for key in top_quartile.keys():
+        print(key)
+
+df = stock_list_lag_test(ticker_list, percent_change=True)
+with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
+    print(df[:100])
+
+
 print(stock_list_lag_test(clean_ticker_list, percent_change = True))
